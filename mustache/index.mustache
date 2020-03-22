@@ -1,0 +1,24 @@
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <form action="/newEntry">
+        <input type="submit" value="Add new entry">
+    </form>
+
+    {{#entries}}
+        <div>
+            <div>
+                <h2>Coursework: {{courseworkNameField}} </h2>
+            </div>
+            <div>
+                <h3> Module: {{moduleField}} </h3>
+                <h3> Milestones: {{milestonesField}} </h3>
+                <h3> Due date: {{dueDateField}} </h3>
+                <h3> Completion date: {{completionDateField}} </h3>
+            <div>
+        </div>
+    {{/entries}}
+
+</body>
