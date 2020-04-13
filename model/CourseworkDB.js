@@ -1,13 +1,13 @@
 //Imports nedb library
 const Datastore = require('nedb');
 
-var nedb = new Datastore({
-    filename: 'db.db',
-    autoload: true
-});
+//var nedb = new Datastore({
+//    filename: 'db.db',
+//    autoload: true
+//});
 
 //Main constructor for the database
-class DAO{
+class CourseworkDB{
     constructor(dbFilePath){
         //Run database as file
         if(dbFilePath){
@@ -16,6 +16,7 @@ class DAO{
         }else{
             //Run database in memory
             this.db = new Datastore();
+            console.log("Database is running in memory");
         }
     }
 
@@ -24,25 +25,22 @@ class DAO{
         this.db.insert({
             courseworkNameField : 'A web application',
             moduleField : 'Web Design Technology',
-            milestonesField : 'none',
             dueDateField : '22.03.2020',
             completionDateField : 'none'
         });
         this.db.insert({
             courseworkNameField : 'Team project SMYO',
             moduleField : 'Integrated Project 2',
-            milestonesField : 'none',
             dueDateField : '29.04.2020',
             completionDateField : 'none'
         });
         this.db.insert({
             courseworkNameField : 'Honours project research',
             moduleField : 'RSPI',
-            milestonesField : 'none',
             dueDateField : '01.05.2020',
             completionDateField : 'none'
         });
-    console.log('new entry inserted');
+        console.log('new entry inserted');
     }
 
     //Returns all entries in the database
@@ -65,7 +63,6 @@ class DAO{
         var entry = {
             courseworkNameField : courseworkName,
             moduleField : module,
-            milestonesField : 'none',
             dueDateField : dueDate,
             completionDateField : 'none'
         };
@@ -83,5 +80,5 @@ class DAO{
 }
 
 //Module exports
-module.exports = DAO;
+module.exports = CourseworkDB;
 

@@ -14,11 +14,16 @@
             </div>
             <div>
                 <h3> Module: {{moduleField}} </h3>
-                <h3> Milestones: {{milestonesField}} </h3>
                 <h3> Due date: {{dueDateField}} </h3>
                 <h3> Completion date: {{completionDateField}} </h3>
             <div>
         </div>
+        
+        <form action="/milestones" method="GET">
+            <input type="submit" value="Milestones" name="{{_id}}" >
+        </form>
+        <form action="/newMilestone" method="GET">
+            <input type="submit" value="Add new milestone" name="{{_id}}" >
+        </form>
     {{/entries}}
-
 </body>
