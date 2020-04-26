@@ -3,16 +3,48 @@
 </head>
 
 <body>
-    {{#milestone}}
-        <div>
-            <div>
-                <h2> Milestone Name: {{milestoneNameField}} </h2>
-            </div>
-            <div>
-                <h3> Milestone date: {{milestoneDateField}} </h3>
-                <h3> Description: {{milestonedescriptionField}} </h3>
-            <div>
-        </div>
-    {{/milestone}}
+   
+
+<div class="card" style="width: 100%">
+
+
+
+
+
+ <table class="table table-hover">
+       {{#milestone}}
+
+ <thead>
+    <tr>
+      <th scope="col">Milestone Name:</th>
+      <th scope="col">Milestone date:</th>
+      <th scope="col">Description:</th>
+      <th scope="col">Edit Milestone</th>
+      <th scope="col">Remove Milestone</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+
+<tr class="table-active">
+      <td>{{milestoneNameField}}</td>
+      <td>{{milestoneDateField}}</td>
+      <td>{{milestonedescriptionField}}</td>
+      <td> </td>
+      <td> </td>
+
+      
+
+  </tbody>
+
+     
+        
+        
+        {{/milestone}}
+    </table> 
+</div>
+
+
 
 </body>

@@ -1,0 +1,60 @@
+
+
+
+<head>
+    {{>header}}
+</head>
+
+<h1>Add Coursework Page</h1>
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+
+
+      <h1 class="text-center mb-3"> Add coursework.
+
+        <% include ./partials/messages %>
+
+      </h1>
+      
+    
+
+      <form action="/coursework/insert-coursework" method="POST">
+        <div class="form-group">
+          <label for="Title">Title</label>
+          <input type="string" id="title" name="title" class="form-control" placeholder="Enter Title" />
+        </div>
+
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="string" id="subject" name="subject" class="form-control" placeholder="Enter Title" />
+        </div>
+
+        <div class="form-group">
+          <label for="dueDate">Due Date</label>
+          <input type="date" id="dueDate" name="dueDate" class="form-control" placeholder="Enter Title" />
+        </div>
+
+
+
+
+
+       
+          
+
+
+          
+
+
+
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Add</button>
+        <a href="javascript:history.back()" class="btn btn-danger btn-block">Go Back</a>
+      </form>
+      <p class="text-success mt-4">
+
+      </p>
+    </div>
+  </div>
+</div>
