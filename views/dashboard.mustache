@@ -65,9 +65,9 @@
             <button  type="submit"name="ID" value="{{_id}}" class="btn btn-warning" >Edit</button>
         </form>
 
-        <form action="/coursework/newMilestone" method="GET" class="form-inline">
+        <form action="/coursework/delete-coursework" method="POST" class="form-inline">
            
-
+            <input type="hidden" id="courseworkId" name="courseworkId" value = "{{_id}}">
             <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-danger">Delete</button>
 
             

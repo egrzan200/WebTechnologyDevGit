@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const objectId = require('mongodb').ObjectID;
 
 // DB Config
 const passport = require('passport');
@@ -171,7 +172,65 @@ router.get('/milestones*', ensureAuthenticated, function (req,res){
 });
 
 
-// Delete the coursework from the database
-router.get('/delete-coursework', ensureAuthenticated,  function (req, res, next) {});
+
+router.post('/delete-coursework/', ensureAuthenticated, function(req, res, next) {
+
+
+    courseworkID =req.body.courseworkId;
+    
+    
+
+    
+
+
+        mongoose.connect(db, function(err, db) {
+            assert.equal(null, err);
+            db.collection('courseWork').deleteOne({"_id": objectId(courseworkID)}, function(err, result) {
+              assert.equal(null, err);
+              console.log(courseworkID)
+              console.log('Coursework deleted');
+              res.redirect("/coursework/dashboard");
+             
+                
+              });
+        
+            });
+            
+        
+
+    
+  
+    
+  });
+
+  router.post('/delete-milestone/', ensureAuthenticated, function(req, res, next) {
+
+
+    milestoneID =req.body.milestoneId;
+    
+    
+
+    
+
+
+        mongoose.connect(db, function(err, db) {
+            assert.equal(null, err);
+            db.collection('Milestones').deleteOne({"_id": objectId(milestoneID)}, function(err, result) {
+              assert.equal(null, err);
+              console.log(milestoneID)
+              console.log('Milestone deleted');
+              res.redirect('back');
+             
+                
+              });
+        
+            });
+            
+        
+
+    
+  
+    
+  });
 
 module.exports = router;

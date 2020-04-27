@@ -32,7 +32,13 @@
       <td>{{milestoneDateField}}</td>
       <td>{{milestonedescriptionField}}</td>
       <td> </td>
-      <td> </td>
+      <td>  <form action="/coursework/delete-milestone" method="POST" class="form-inline">
+           
+            <input type="hidden" id="milestoneId" name="milestoneId" value = "{{_id}}">
+            <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-danger">Delete</button>
+
+            
+        </form></td>
 
       
 
