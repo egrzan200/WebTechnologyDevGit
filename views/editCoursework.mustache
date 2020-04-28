@@ -1,0 +1,41 @@
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <h1>Edit Coursework Page</h1>
+    <div class="row mt-5">
+        <div class="col-md-6 m-auto">
+            <div class="card card-body">
+                <h1 class="text-center mb-3"> Edit coursework</h1>
+
+                {{#coursework}}
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="Title">Title</label>
+                            <input type="string" id="title" name="title" class="form-control" placeholder="{{courseworkNameField}}" value="{{courseworkNameField}}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="string" id="subject" name="subject" class="form-control" placeholder="{{moduleField}}" value="{{moduleField}}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dueDate">Due Date</label>
+                            <input type="date" id="dueDate" name="dueDate" class="form-control" placeholder="{{dueDateField}}" value="{{dueDateField}}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dueDate">Completion Date</label>
+                            <input type="date" id="completionDate" name="completionDate" class="form-control" placeholder="{{completionDateField}}" value="{{completionDateField}}" />
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-block">Confirm</button>
+                        <a href="javascript:history.back()" class="btn btn-danger btn-block">Go Back</a>
+                    </form>
+                {{/coursework}}
+            </div>
+        </div>
+    </div>
+</body>

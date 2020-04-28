@@ -22,7 +22,7 @@ router.get('/addCoursework', ensureAuthenticated, (req, res) => res.render('addC
 
 
 // Get coursework assosiated with the logged in account
-router.get('/dashboard',ensureAuthenticated, function (req, res, next) {
+router.get('/dashboard',ensureAuthenticated, function (req, res) {
 
     var resultArray = []
     mongoose.connect(db, function (err, db) {
@@ -31,26 +31,18 @@ router.get('/dashboard',ensureAuthenticated, function (req, res, next) {
         var cursor = db.collection('courseWork').find({
             ownerID: req.user.id
         });
+
         cursor.forEach(function (doc, err) {
             assert.equal(null, err);
             resultArray.push(doc);
-
         }, function () {
-
-            
             user = req.user;
-
             //console.log(resultArray);
             //console.log("Printed Resutls");
-
             res.render("dashboard", {'entries': resultArray, 'name': req.user.name});
-
-
         });
     });
 });
-
-
 
 // Add new coursework to the database
 router.post('/insert-coursework', ensureAuthenticated,  function (req, res) {
@@ -88,149 +80,78 @@ router.post('/insert-coursework', ensureAuthenticated,  function (req, res) {
     }
 });
 
-
-//Render new milestone page
-router.get('/newMilestone',ensureAuthenticated,  function(req,res){
-    res.render('newMilestone');
-    courseworkID =req.query.ID;
-      
-});
-
-
-//Add new milestone to the database
-router.post('/newMilestone*', ensureAuthenticated , function(req, res){
+router.post('/delete-coursework/', ensureAuthenticated, function(req, res, next) {
+    courseworkID =req.body.courseworkId;
     
-
-
-    
-    
-
-    var milestone = {
-        milestoneNameField: req.body.milestoneName,
-        milestoneDateField: req.body.milestoneDate,
-        milestonedescriptionField: req.body.milestoneDescription,
-        courseworkIDField: courseworkID
-
-    };
-    let errors = [];
-
-    if (!req.body.milestoneName || !req.body.milestoneDate || !req.body.milestoneDescription) {
-
-        errors.push({
-            msg: 'Please enter all fields'
-        });
-
-    } else {
-
-        mongoose.connect(db, function (err, db) {
-
-            assert.equal(null, err);
-
-            db.collection('Milestones').insertOne(milestone, function (err, result) {
-
-                assert.equal(null, err);
-                console.log(courseworkID);
-                console.log('Milestone inserted');
-                req.flash('success_msg', 'Item added successfully');
-                res.redirect("/coursework/dashboard")
-            });
-        });
-    }
-
-
-
-});
-
-
-//Display milestones
-router.get('/milestones*', ensureAuthenticated, function (req,res){
-
-    courseworkID =req.query.ID;
-
-    var milestonesArray = []
-    mongoose.connect(db, function (err, db) {
-
+    mongoose.connect(db, function(err, db) {
         assert.equal(null, err);
-        var cursor = db.collection('Milestones').find({
-            courseworkIDField: courseworkID
-        });
-        cursor.forEach(function (doc, err) {
+        db.collection('courseWork').deleteOne({_id: objectId(courseworkID)}, function(err) {
             assert.equal(null, err);
-            milestonesArray.push(doc);
+            console.log(courseworkID);
+            console.log('Coursework deleted');
+            res.redirect("/coursework/dashboard");
+        });
+        
+    });
+});
 
-        }, function () {
+//Renders the share coursework page and sends the coursework information as well as the array of milestones
+router.get('/shareCoursework*', function(req, res){
+    courseworkID = req.query.ID;
 
-            res.render("milestones", {'milestone': milestonesArray});
+    mongoose.connect(db, async function(err, db){
+        assert.equal(null,err);
+        var milestones = [];
+        var coursework = await db.collection('courseWork').find({_id : objectId(courseworkID)}).toArray();
+        //console.log(coursework);
 
+        var cursor = db.collection('milestone').find({courseworkIDField : courseworkID});
+        //console.log(cursor);
 
+        cursor.forEach(function(result, err){
+            assert.equal(null, err);
+            milestones.push(result);
+            //console.log(result);
+
+        }, function(){
+            res.render("shareCoursework", {coursework : coursework, milestones : milestones});    
+        });
+    });
+});
+
+router.get('/editCoursework*', ensureAuthenticated, function(req, res){
+    courseworkID = req.query.ID;
+
+    mongoose.connect(db, async function(err, db){
+        assert.equal(null,err);
+        var coursework = await db.collection('courseWork').find({_id : objectId(courseworkID)}).toArray();
+        res.render("editCoursework", {coursework : coursework});
+    });
+});
+
+router.post('/editCoursework*', ensureAuthenticated, function(req, res){
+    courseworkID = req.query.ID;
+
+    mongoose.connect(db, async function(err, db){
+        assert.equal(null,err);
+
+        var newCoursework = {
+            courseworkNameField : req.body.title,
+            moduleField : req.body.subject,
+            dueDateField : req.body.dueDate,
+            completionDateField : req.body.completionDate,
+        }
+
+        db.collection('courseWork').updateOne({_id : objectId(courseworkID)}, {$set: newCoursework}, function(err){
+            //console.log("I got here");
+
+            assert.equal(null,err);
+
+            console.log("Coursework updated");
+            res.redirect("/coursework/dashboard");
         });
     });
 
-    
-
-
 });
-
-
-
-router.post('/delete-coursework/', ensureAuthenticated, function(req, res, next) {
-
-
-    courseworkID =req.body.courseworkId;
-    
-    
-
-    
-
-
-        mongoose.connect(db, function(err, db) {
-            assert.equal(null, err);
-            db.collection('courseWork').deleteOne({"_id": objectId(courseworkID)}, function(err, result) {
-              assert.equal(null, err);
-              console.log(courseworkID)
-              console.log('Coursework deleted');
-              res.redirect("/coursework/dashboard");
-             
-                
-              });
-        
-            });
-            
-        
-
-    
-  
-    
-  });
-
-  router.post('/delete-milestone/', ensureAuthenticated, function(req, res, next) {
-
-
-    milestoneID =req.body.milestoneId;
-    
-    
-
-    
-
-
-        mongoose.connect(db, function(err, db) {
-            assert.equal(null, err);
-            db.collection('Milestones').deleteOne({"_id": objectId(milestoneID)}, function(err, result) {
-              assert.equal(null, err);
-              console.log(milestoneID)
-              console.log('Milestone deleted');
-              res.redirect('back');
-             
-                
-              });
-        
-            });
-            
-        
-
-    
-  
-    
-  });
 
 module.exports = router;
