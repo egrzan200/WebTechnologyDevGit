@@ -7,7 +7,7 @@
       <div class="card" style="width: 100%">
             <table class="table table-hover">
                   {{#milestone}}
-                              <thead>
+                        <thead>
                               <tr>
                                     <th scope="col">Milestone Name:</th>
                                     <th scope="col">Milestone date:</th>
@@ -17,15 +17,23 @@
                               </tr>
                         </thead>
                         <tbody>
-                        <tr class="table-active">
-                              <td>{{milestoneNameField}}</td>
-                              <td>{{milestoneDateField}}</td>
-                              <td>{{milestonedescriptionField}}</td>
-                              <br>
-                              <td>  <form action="/coursework/delete-milestone" method="POST" class="form-inline">
-                                    <input type="hidden" id="milestoneId" name="milestoneId" value = "{{_id}}">
-                                    <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-danger">Delete</button>
-                              </form></td>
+
+                              <tr class="table-active">
+                                    <td>{{milestoneNameField}}</td>
+                                    <td>{{milestoneDateField}}</td>
+                                    <td>{{milestonedescriptionField}}</td>
+                                    <td>
+                                          <form action="/milestone/editMilestone" method="GET" class="form-inline">
+                                                <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-warning">Edit</button>
+                                          </form>
+                                    </td>
+                                    <td>  
+                                          <form action="/milestone/delete-milestone" method="POST" class="form-inline">
+                                                <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-danger">Delete</button>
+                                          </form>
+                                    </td>
+                              </tr>
+                              
                         </tbody>
                   {{/milestone}}
             </table> 

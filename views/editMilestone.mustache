@@ -1,0 +1,39 @@
+<head>
+    {{>header}}
+</head>
+<body>
+    <div class="row mt-5">
+        <div class="col-md-6 m-auto">
+            <div class="card card-body">
+                <h1 class="text-center mb-3"> Edit milestone.</h1>
+                
+                {{#milestone}}
+                    <form  method="POST">
+                    
+                        <div class="form-group">
+                            <label for="milestoneName">Milestone Name: </label><br>
+                            <input type="string" id="milestoneName" name="milestoneName" class="form-control" placeholder="{{milestoneNameField}}" value="{{milestoneNameField}}"><br>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="milestoneDate">Milestone due date: </label><br>
+                            <input type="date" id="milestoneDate" name="milestoneDate" class="form-control" placeholder="{{milestoneDateField}}" value="{{milestoneDateField}}"><br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="milestoneDescription">Description: </label><br>
+                            <input type="string" id="milestoneDescription" name="milestoneDescription" class="form-control" placeholder="{{milestonedescriptionField}}" value="{{milestonedescriptionField}}"><br>
+                        
+                            <button type="submit" class="btn btn-success btn-block">Confirm</button>
+                            <a href="javascript:history.back()" class="btn btn-danger btn-block">Go Back</a>
+                        </div>
+                    
+                    </form>
+                {{/milestone}}
+
+                <p class="text-success mt-4"></p>
+        
+            </div>
+        </div>
+    </div>
+</body>

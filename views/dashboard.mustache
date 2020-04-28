@@ -10,12 +10,12 @@
 
                 <thead>
                     <tr>
-                    <th scope="col">Coursework</th>
-                    <th scope="col">Module</th>
-                    <th scope="col">Due date</th>
-                    <th scope="col">Completion date</th>
-                    <th scope="col">Milestones</th>
-                    <th scope="col">More</th>
+                        <th scope="col">Coursework</th>
+                        <th scope="col">Module</th>
+                        <th scope="col">Due date</th>
+                        <th scope="col">Completion date</th>
+                        <th scope="col">Milestones</th>
+                        <th scope="col">More</th>
                     </tr>
                 </thead>
 
@@ -25,19 +25,19 @@
                         <td>{{courseworkNameField}}</td>
                         <td>{{moduleField}}</td>
                         <td>{{dueDateField}}</td>
-                        <td>{{completitonDateField}}</td>
+                        <td>{{completionDateField}}</td>
                         <td>
-                            <form action="/coursework/milestones" method="GET" class="form-inline" >
+                            <form action="/milestone/milestones" method="GET" class="form-inline" >
                                 <button  type="submit"name="ID" value="{{_id}}" class="btn btn-success" >View Milestones</button>
                             </form>
 
-                            <form action="/coursework/newMilestone" method="GET" class="form-inline">
+                            <form action="/milestone/newMilestone" method="GET" class="form-inline">
                                 <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-success"> Add Milestone</button>
                             </form>
                         </td>
 
                         <td>
-                            <form action="/coursework/milestones" method="GET" class="form-inline" >
+                            <form action="/coursework/editCoursework" method="GET" class="form-inline" >
                                 <button  type="submit"name="ID" value="{{_id}}" class="btn btn-warning" >Edit</button>
                             </form>
 
@@ -47,7 +47,7 @@
                             </form>
 
 
-                            <form action="/coursework/newMilestone" method="GET" class="form-inline">
+                            <form action="/coursework/shareCoursework" method="GET" class="form-inline">
                                 <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-info">Share</button>
                             </form>
                         </td>

@@ -1,0 +1,50 @@
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1 class="mt-0">To share this coursework copy and send the URL link.</h1>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Coursework</th>
+                    <th scope="col">Module</th>
+                    <th scope="col">Due date</th>
+                    <th scope="col">Completion date</th>
+                </tr>
+            </thead>
+
+            {{#coursework}}
+                <tbody>
+                    <tr class="table-active">
+                        <td>{{courseworkNameField}}</td>
+                        <td>{{moduleField}}</td>
+                        <td>{{dueDateField}}</td>
+                        <td>{{completionDateField}}</td>
+                    </tr>
+                </tbody>
+            {{/coursework}}
+        </table>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Milestone Name:</th>
+                    <th scope="col">Milestone date:</th>
+                    <th scope="col">Description:</th>
+                </tr>
+            </thead>
+            {{#milestones}}
+                <tbody>
+                    <tr class="table-active">
+                        <td>{{milestoneNameField}}</td>
+                        <td>{{milestoneDateField}}</td>
+                        <td>{{milestonedescriptionField}}</td>
+                    </tr>
+                </tbody>
+            {{/milestones}}
+        </table>
+
+    </div>
+</body>

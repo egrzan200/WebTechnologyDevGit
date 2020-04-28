@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const courseWorkSchema = new mongoose.Schema({
+const MilestoneSchema = new mongoose.Schema({
     milestoneNameField: {
     type: String,
     required: true
@@ -17,8 +17,6 @@ const courseWorkSchema = new mongoose.Schema({
     type: date,
     required: false
   }
-
-
 });
 
 const Milestone = mongoose.model('milestone', MilestoneSchema);
