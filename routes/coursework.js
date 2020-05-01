@@ -10,7 +10,6 @@ const session = require('express-session');
 const db = require('../config/keys').mongoURI;
 const assert = require('assert');
 
-const url = require('url');
 
 const {
     ensureAuthenticated,
@@ -44,6 +43,72 @@ router.get('/dashboard',ensureAuthenticated, function (req, res) {
     });
 });
 
+
+// Get coursework assosiated with the logged in account
+router.get('/showComplete',ensureAuthenticated, function (req, res) {
+
+    var resultArray = []
+    mongoose.connect(db, function (err, db) {
+
+        assert.equal(null, err);
+        var cursor = db.collection('courseWork').find({
+            ownerID: req.user.id , 
+            completionDateField: {$ne:""}
+
+            
+        });
+
+        cursor.forEach(function (doc, err) {
+            assert.equal(null, err);
+
+            resultArray.push(doc);
+
+            
+
+           
+
+
+        }, function () {
+            user = req.user;
+            //console.log(resultArray);
+            //console.log("Printed Resutls");
+            res.render("dashboard", {'entries': resultArray, 'name': req.user.name});
+        });
+    });
+});
+
+
+router.get('/showIncomplete',ensureAuthenticated, function (req, res) {
+
+    var resultArray = []
+    mongoose.connect(db, function (err, db) {
+
+        assert.equal(null, err);
+        var cursor = db.collection('courseWork').find({
+            ownerID: req.user.id , 
+            completionDateField: ""
+
+            
+        });
+
+        cursor.forEach(function (doc, err) {
+            assert.equal(null, err);
+
+            resultArray.push(doc);
+
+            
+
+           
+
+
+        }, function () {
+            user = req.user;
+            //console.log(resultArray);
+            //console.log("Printed Resutls");
+            res.render("dashboard", {'entries': resultArray, 'name': req.user.name});
+        });
+    });
+});
 // Add new coursework to the database
 router.post('/insert-coursework', ensureAuthenticated,  function (req, res) {
 

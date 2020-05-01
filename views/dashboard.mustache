@@ -1,11 +1,20 @@
+
+
+
+
+
 <head>
     {{>header}}
 </head>
 
+
+
+
+
 <body>
     <div class="jumbotron">
         <h1 class="mt-0">Welcome {{ name }}</h1>
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
             {{#entries}}
 
                 <thead>
@@ -21,35 +30,66 @@
 
                 <tbody>
 
-                    <tr class="table-active">
+                    <tr class="table-default">
                         <td>{{courseworkNameField}}</td>
                         <td>{{moduleField}}</td>
                         <td>{{dueDateField}}</td>
                         <td>{{completionDateField}}</td>
                         <td>
-                            <form action="/milestone/milestones" method="GET" class="form-inline" >
-                                <button  type="submit"name="ID" value="{{_id}}" class="btn btn-success" >View Milestones</button>
+
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-success">More</button>
+  <div class="btn-group" role="group">
+    <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+
+
+      <form action="/milestone/milestones" method="GET" class="dropdown-item" >
+                                <button  type="submit"name="ID" value="{{_id}}" class="dropdown-item" >View Milestones</button>
                             </form>
 
-                            <form action="/milestone/newMilestone" method="GET" class="form-inline">
-                                <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-success"> Add Milestone</button>
+                            <form action="/milestone/newMilestone" method="GET" class="dropdown-item">
+                                <button  type="submit" name="ID" value="{{_id}}"  class="dropdown-item"> Add Milestone</button>
                             </form>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+                           
                         </td>
 
                         <td>
-                            <form action="/coursework/editCoursework" method="GET" class="form-inline" >
-                                <button  type="submit"name="ID" value="{{_id}}" class="btn btn-warning" >Edit</button>
+
+
+                                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-warning">Edit</button>
+  <div class="btn-group" role="group">
+    <button id="btnGroupDrop3" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop3" style="">
+      
+                            <form action="/coursework/editCoursework" method="GET" class="dropdown-item" >
+                                <button  type="submit"name="ID" value="{{_id}}" class="dropdown-item" >Edit</button>
                             </form>
 
-                            <form action="/coursework/delete-coursework" method="POST" class="form-inline">
+                            <form action="/coursework/delete-coursework" method="POST" class="dropdown-item">
                                 <input type="hidden" id="courseworkId" name="courseworkId" value = "{{_id}}">
-                                <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-danger">Delete</button>
+                                <button  type="submit" name="ID" value="{{_id}}"  class="dropdown-item">Delete</button>
                             </form>
 
 
-                            <form action="/coursework/shareCoursework" method="GET" class="form-inline">
-                                <button  type="submit" name="ID" value="{{_id}}"  class="btn btn-info">Share</button>
+                            <form action="/coursework/shareCoursework" method="GET" class="dropdown-item">
+                                <button  type="submit" name="ID" value="{{_id}}"  class="dropdown-item">Share</button>
                             </form>
+    </div>
+  </div>
+</div>
+
+                      
                         </td>
                     </tr>
                 </tbody>
