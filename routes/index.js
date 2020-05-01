@@ -9,8 +9,8 @@ const {
 router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
 
 // Dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) =>
-  res.redirect('/coursework/dashboard');
-);
+router.get('/dashboard', ensureAuthenticated, function(req, res){
+  res.redirect("/coursework/dashboard");
+}
 
 module.exports = router;
