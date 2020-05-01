@@ -4,6 +4,8 @@ This web application aims to help students with coursework management. It allows
 
 Code example, this piece of code displays all courseworks of the logged in user:
 
+The website can be accessed through: https://web-coursework-browser.herokuapp.com/coursework/dashboard
+
 // Get coursework assosiated with the logged in account
 router.get('/dashboard',ensureAuthenticated, function (req, res) {
 
