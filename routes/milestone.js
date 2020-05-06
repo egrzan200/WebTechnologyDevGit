@@ -88,7 +88,7 @@ router.post('/delete-milestone/', ensureAuthenticated, function(req, res, next) 
             assert.equal(null, err);
             console.log(milestoneID)
             console.log('Milestone deleted');
-            res.redirect('back');
+            res.redirect("/coursework/dashboard");
         });
     });
 });
